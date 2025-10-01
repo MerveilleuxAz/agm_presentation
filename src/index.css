@@ -1,0 +1,288 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system pour portfolio développeur - Rouge vin, Noir, Blanc */
+
+@layer base {
+  :root {
+    /* Portfolio Color Palette - Rouge vin, Noir, Blanc */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    /* Rouge vin principal */
+    --primary: 346 66% 30%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 346 66% 45%;
+
+    /* Variations du rouge vin */
+    --wine: 346 66% 30%;
+    --wine-light: 346 66% 45%;
+    --wine-dark: 346 66% 20%;
+
+    /* Grays pour nuances */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 346 66% 30%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 346 66% 30%;
+
+    /* Gradients pour effets dynamiques */
+    --gradient-wine: linear-gradient(135deg, hsl(346 66% 30%), hsl(346 66% 45%));
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 0%), hsl(346 66% 30%));
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%), hsl(0 0% 98%));
+
+    /* Shadows avec couleur wine */
+    --shadow-wine: 0 10px 30px -10px hsl(346 66% 30% / 0.3);
+    --shadow-glow: 0 0 40px hsl(346 66% 45% / 0.4);
+    --shadow-elegant: 0 4px 20px hsl(0 0% 0% / 0.1);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Animations personnalisées */
+  .typing-animation {
+    overflow: hidden;
+    border-right: 2px solid hsl(var(--wine));
+    white-space: nowrap;
+    animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes blink-caret {
+    from, to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: hsl(var(--wine));
+    }
+  }
+
+  /* Hover effects */
+  .project-card {
+    transition: var(--transition-smooth);
+    transform: translateY(0);
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-wine);
+  }
+
+  .skill-bubble {
+    transition: var(--transition-bounce);
+  }
+
+  .skill-bubble:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Gradients utilitaires */
+  .bg-gradient-wine {
+    background: var(--gradient-wine);
+  }
+
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .bg-gradient-subtle {
+    background: var(--gradient-subtle);
+  }
+
+  /* Scroll reveal animation */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-in-up.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Mobile navigation bottom bar */
+  .mobile-nav-bottom {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid hsl(var(--border));
+  }
+
+  /* Hero image animation */
+  .hero-image {
+    transition: transform 0.3s ease-out;
+  }
+
+  .hero-image:hover {
+    transform: scale(1.02);
+  }
+
+  /* Navigation active indicator */
+  .nav-indicator {
+    background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    border-radius: 50%;
+    animation: pulse-glow 2s infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 0 0 hsl(var(--primary) / 0.7);
+    }
+    50% {
+      box-shadow: 0 0 0 4px hsl(var(--primary) / 0);
+    }
+  }
+
+  /* 404 Page animations */
+  .glitch-text {
+    position: relative;
+    animation: glitch 2s infinite;
+  }
+
+  .glitch-text-shadow {
+    animation: glitch-shadow 2s infinite;
+  }
+
+  @keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    10% { transform: translate(-2px, -2px); }
+    20% { transform: translate(2px, 2px); }
+    30% { transform: translate(-2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    50% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    70% { transform: translate(-2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    90% { transform: translate(-2px, -2px); }
+  }
+
+  @keyframes glitch-shadow {
+    0%, 100% { transform: translate(0); opacity: 0.3; }
+    10% { transform: translate(3px, 3px); opacity: 0.5; }
+    20% { transform: translate(-3px, -3px); opacity: 0.3; }
+    30% { transform: translate(3px, -3px); opacity: 0.4; }
+    40% { transform: translate(-3px, 3px); opacity: 0.2; }
+    50% { transform: translate(3px, 3px); opacity: 0.5; }
+    60% { transform: translate(-3px, -3px); opacity: 0.3; }
+    70% { transform: translate(3px, -3px); opacity: 0.4; }
+    80% { transform: translate(-3px, 3px); opacity: 0.2; }
+    90% { transform: translate(3px, 3px); opacity: 0.5; }
+  }
+
+  .animate-fade-in-delay-200 {
+    animation: fade-in 0.6s ease-out 0.2s both;
+  }
+
+  .animate-fade-in-delay-400 {
+    animation: fade-in 0.6s ease-out 0.4s both;
+  }
+
+  .animate-fade-in-delay-600 {
+    animation: fade-in 0.6s ease-out 0.6s both;
+  }
+
+  .animate-fade-in-delay-800 {
+    animation: fade-in 0.6s ease-out 0.8s both;
+  }
+}
