@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle, MessageCircleCode } from 'lucide-react';
+import { Mail, Github, Linkedin, Send, CheckCircle } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -17,14 +17,13 @@ const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const { toast } = useToast();
 
-  // Configuration EmailJS - Remplacez par vos vraies clés
   const EMAILJS_CONFIG = {
     SERVICE_ID: 'service_7ihuyqp',
     TEMPLATE_ID: 'template_v40j66f',
     PUBLIC_KEY: 'BmBw8512MYdapWysJ'
   };
 
-  const contactInfo = [
+  const contactLinks = [
     {
       icon: Mail,
       label: 'Email',
@@ -32,43 +31,16 @@ const Contact = () => {
       href: 'mailto:merveilleuxazihou@gmail.com'
     },
     {
-      icon: Phone,
-      label: 'Téléphone',
-      value: '+229 01 52 43 16 95',
-      href: 'tel:+2290152431695'
+      icon: Linkedin,
+      label: 'LinkedIn',
+      value: 'merveilleux-azihou',
+      href: 'https://www.linkedin.com/in/merveilleux-azihou'
     },
-    {
-      icon: MapPin,
-      label: 'Localisation',
-      value: 'Abomey-Calavi, Bénin',
-      href: 'https://maps.app.goo.gl/riMoZ74kXoRodb6GA'
-    }
-  ];
-
-  const socialLinks = [
     {
       icon: Github,
       label: 'GitHub',
-      href: 'https://github.com/MerveilleuxAz',
-      color: 'hover:text-foreground'
-    },
-    {
-      icon: Linkedin,
-      label: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/merveilleux-azihou',
-      color: 'hover:text-blue-600'
-    },
-    {
-      icon: Mail,
-      label: 'Email',
-      href: 'mailto:merveilleuxazihou@gmail.com',
-      color: 'hover:text-primary'
-    },
-    {
-      icon: MessageCircleCode,
-      label: 'WhatsApp',
-      href: 'https://wa.me/22952431695',
-      color: 'hover:text-green-500'
+      value: 'MerveilleuxAz',
+      href: 'https://github.com/MerveilleuxAz'
     }
   ];
 
@@ -94,19 +66,14 @@ const Contact = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // Envoi via EmailJS
       await emailjs.send(
         EMAILJS_CONFIG.SERVICE_ID,
         EMAILJS_CONFIG.TEMPLATE_ID,
@@ -126,14 +93,7 @@ const Contact = () => {
         duration: 5000,
       });
 
-      // Réinitialisation du formulaire
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-
+      setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       console.error('Erreur lors de l\'envoi:', error);
       toast({
@@ -148,77 +108,55 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="py-20 bg-background">
+    <section id="contact" ref={sectionRef} className="py-20 bg-gradient-subtle">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="fade-in-up text-4xl md:text-5xl font-bold text-foreground mb-6">
             Restons en <span className="text-primary">Contact</span>
           </h2>
           <p className="fade-in-up text-lg text-muted-foreground max-w-3xl mx-auto">
-            Vous avez un projet en tête ? N'hésitez pas à me contacter pour discuter
-            de vos besoins et voir comment nous pouvons collaborer.
+            Je suis ouvert aux opportunités de stage, emploi, freelance et collaboration
+            sur des projets web.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16">
-          {/* Contact Info */}
           <div className="fade-in-up">
             <h3 className="text-2xl font-semibold text-foreground mb-8">
-              Informations de contact
+              Me joindre
             </h3>
 
-            <div className="space-y-6 mb-8">
-              {contactInfo.map((info, index) => (
+            <div className="space-y-4 mb-8">
+              {contactLinks.map((link, index) => (
                 <a
                   key={index}
-                  href={info.href}
+                  href={link.href}
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel="noopener noreferrer"
                   className="flex items-center group p-4 rounded-lg border border-border hover:bg-primary/5 hover:border-primary/20 transition-all duration-300"
                 >
                   <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4 group-hover:bg-primary/20 transition-colors">
-                    <info.icon size={20} className="text-primary" />
+                    <link.icon size={20} className="text-primary" />
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">{info.label}</p>
-                    <p className="text-foreground font-medium">{info.value}</p>
+                    <p className="text-sm text-muted-foreground">{link.label}</p>
+                    <p className="text-foreground font-medium">{link.value}</p>
                   </div>
                 </a>
               ))}
             </div>
 
-            {/* Social Links */}
-            <div>
-              <h4 className="text-lg font-semibold text-foreground mb-4">
-                Suivez-moi
-              </h4>
-              <div className="flex space-x-4">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-12 h-12 bg-muted rounded-lg flex items-center justify-center text-muted-foreground transition-all duration-300 hover:scale-110 hover:shadow-lg ${social.color}`}
-                  >
-                    <social.icon size={20} />
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Availability */}
-            <div className="mt-8 p-6 bg-gradient-wine rounded-xl text-white">
+            <div className="p-6 bg-gradient-wine rounded-xl text-white">
               <div className="flex items-center mb-3">
                 <CheckCircle size={20} className="text-green-300 mr-2" />
-                <span className="font-medium">Disponible pour de nouveaux projets</span>
+                <span className="font-medium">Disponible pour de nouvelles opportunités</span>
               </div>
               <p className="text-white/80 text-sm">
-                Je suis actuellement disponible pour de nouvelles missions freelance
-                ou des opportunités de collaboration à long terme.
+                Stage, emploi, freelance ou projet collaboratif — contactez-moi.
               </p>
             </div>
           </div>
 
-          {/* Contact Form */}
           <div className="fade-in-up">
             <h3 className="text-2xl font-semibold text-foreground mb-8">
               Envoyez-moi un message
@@ -237,7 +175,6 @@ const Contact = () => {
                     required
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full"
                     placeholder="Votre nom"
                   />
                 </div>
@@ -252,7 +189,6 @@ const Contact = () => {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full"
                     placeholder="votre@email.com"
                   />
                 </div>
@@ -269,8 +205,7 @@ const Contact = () => {
                   required
                   value={formData.subject}
                   onChange={handleInputChange}
-                  className="w-full"
-                  placeholder="Sujet de votre message"
+                  placeholder="Stage, emploi, projet..."
                 />
               </div>
 
@@ -284,8 +219,8 @@ const Contact = () => {
                   required
                   value={formData.message}
                   onChange={handleInputChange}
-                  className="w-full min-h-[120px]"
-                  placeholder="Décrivez votre projet ou vos besoins..."
+                  className="min-h-[120px]"
+                  placeholder="Décrivez votre opportunité ou votre projet..."
                 />
               </div>
 

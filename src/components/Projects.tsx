@@ -21,6 +21,8 @@ const Projects = () => {
       id: 1,
       title: 'Campagne Publicitaire par Mail',
       description: 'A comprehensive platform for sustainable living, featuring interactive guides and community features.',
+      role: 'Ton rôle dans le projet',
+      result: 'Ce que le projet permet de faire',
       image: '/img/works/uiux/mail_campagn.png',
       categories: ['web'],
       technologies: ['Laravel', 'Ajax', 'MySQL'],
@@ -31,6 +33,8 @@ const Projects = () => {
       id: 2,
       title: 'ZemiHi App',
       description: 'Application mobile de suivi de santé avec synchronisation cloud et visualisations interactives.',
+      role: 'Ton rôle dans le projet',
+      result: 'Ce que le projet permet de faire',
       image: '/img/works/uiux/zemihi.png',
       categories: ['mobile', 'design'],
       technologies: ['Figma', 'Flutter', 'Node.js', 'PostgresQL'],
@@ -41,6 +45,8 @@ const Projects = () => {
       id: 3,
       title: 'FAI (Fournisseur d\'Accès Internet)',
       description: 'Dashboard interactif pour la visualisation et l\'analyse de données business en temps réel.',
+      role: 'Ton rôle dans le projet',
+      result: 'Ce que le projet permet de faire',
       image: '/img/works/uiux/fai.png',
       categories: ['design'],
       technologies: ['Figma', 'Photoshop'],
@@ -51,6 +57,8 @@ const Projects = () => {
       id: 4,
       title: 'IFRI Chat App',
       description: 'Système de design complet avec composants réutilisables et documentation interactive.',
+      role: 'Ton rôle dans le projet',
+      result: 'Ce que le projet permet de faire',
       image: '/img/works/uiux/ifri_chat.png',
       categories: ['mobile'],
       technologies: ['Figma', 'Flutter', 'Node.js', 'MongoDB'],
@@ -61,6 +69,8 @@ const Projects = () => {
       id: 5,
       title: 'GléHi',
       description: 'Chatbot intelligent avec traitement du langage naturel pour le support client automatisé.',
+      role: 'Ton rôle dans le projet',
+      result: 'Ce que le projet permet de faire',
       image: '/img/works/uiux/glehi.png',
       categories: ['design', 'mobile'],
       technologies: ['Figma', 'Flutter', 'Node.js', 'MongoDB'],
@@ -71,6 +81,8 @@ const Projects = () => {
       id: 6,
       title: 'Système de recommandation',
       description: 'Application mobile showcase avec animations fluides et interface utilisateur moderne.',
+      role: 'Ton rôle dans le projet',
+      result: 'Ce que le projet permet de faire',
       image: '/img/works/data/data.png',
       categories: ['data'],
       technologies: ['Python', 'Streamlit'],
@@ -184,25 +196,47 @@ const Projects = () => {
               </div>
 
               {/* Project Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-foreground mb-3">
-                  {project.title}
+              <div className="p-6 flex flex-col h-full">
+                <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+                  <span className="text-primary">🔹</span> {project.title}
                 </h3>
-                {/* <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                  {project.description}
-                </p> */}
+                
+                <div className="space-y-4 mb-6 flex-grow">
+                  <div>
+                    <h4 className="text-sm font-semibold text-foreground mb-1">Description</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-sm font-semibold text-foreground mb-1">Rôle</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {project.role}
+                    </p>
+                  </div>
 
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech) => (
-                    <Badge
-                      key={tech}
-                      variant="secondary"
-                      className="text-xs bg-primary/10 text-primary hover:bg-primary/20"
-                    >
-                      {tech}
-                    </Badge>
-                  ))}
+                  <div>
+                    <h4 className="text-sm font-semibold text-foreground mb-2">Technologies</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => (
+                        <Badge
+                          key={tech}
+                          variant="secondary"
+                          className="text-xs bg-primary/10 text-primary hover:bg-primary/20"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-semibold text-foreground mb-1">Résultat</h4>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {project.result}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Action buttons */}

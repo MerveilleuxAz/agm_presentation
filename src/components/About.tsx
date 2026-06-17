@@ -50,7 +50,7 @@ const About = () => {
 
   const stats = [
     { number: '20+', label: 'Projets réalisés' },
-    { number: '2+', label: 'Années d\'expérience' },
+    { number: '3+', label: 'Années d\'expérience' },
     { number: '15+', label: 'Technologies maîtrisées' },
     { number: '96%', label: 'Clients satisfaits' }
   ];
@@ -99,7 +99,7 @@ const About = () => {
               Créateur d'expériences numériques
             </h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Avec plus de 2 ans d'expérience dans le développement web et mobile,
+              Avec plus de 3 ans d'expérience dans le développement web et mobile,
               je me spécialise dans la création d'applications performantes et d'interfaces
               utilisateur élégantes. Ma passion pour la data analysis me permet d'apporter
               une dimension analytique à mes projets.
