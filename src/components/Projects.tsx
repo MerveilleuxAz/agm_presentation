@@ -168,16 +168,13 @@ const Projects = () => {
           {filteredProjects.map((project, index) => (
             <div
               key={`${activeFilter}-${project.id}`}
-              className="fade-in-up project-card bg-card rounded-xl overflow-hidden shadow-elegant border border-border animate-fade-in"
+              className="fade-in-up project-card bg-card rounded-xl overflow-hidden shadow-elegant border border-border animate-fade-in transition-all duration-300 hover:shadow-wine hover:-translate-y-2"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Project Image */}
               <div className="relative h-48 bg-gradient-wine overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-wine/40 flex items-center justify-center">
-                  <div className="text-white text-center">
-                    <img src={`${project.image}`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    <p className="text-sm opacity-80">Image du projet</p>
-                  </div>
+                  <img src={`${project.image}`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <div className="absolute top-4 right-4 flex gap-2">
                   <a
@@ -198,10 +195,10 @@ const Projects = () => {
               {/* Project Content */}
               <div className="p-6 flex flex-col h-full">
                 <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-                  <span className="text-primary">🔹</span> {project.title}
+                  {project.title}
                 </h3>
                 
-                <div className="space-y-4 mb-6 flex-grow">
+                <div className="space-y-4 flex-grow">
                   <div>
                     <h4 className="text-sm font-semibold text-foreground mb-1">Description</h4>
                     <p className="text-muted-foreground text-sm leading-relaxed">
